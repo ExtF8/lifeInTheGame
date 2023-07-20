@@ -5,23 +5,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Conway's Game of Life</title>
         <link rel="stylesheet" href="style.css" />
+        <script src="script.js" defer></script>
     </head>
     <body>
         <h1>Conway's Game of Life</h1>
         <div class="rules">
             <ul>
-                <li>Any live cell with fewer than two live neighbors dies (underpopulation)</li>
-                <li>Any live cell with two or three live neighbors lives on to the next generation</li>
-                <li>Any live cell with more than three live neighbors dies (overpopulation)</li>
-                <li>Any dead cell with exactly three live neighbors becomes a live cell (reproduction)</li>
+                <li>
+                    Any live cell with fewer than two live neighbors dies
+                    (underpopulation)
+                </li>
+                <li>
+                    Any live cell with two or three live neighbors lives on to
+                    the next generation
+                </li>
+                <li>
+                    Any live cell with more than three live neighbors dies
+                    (overpopulation)
+                </li>
+                <li>
+                    Any dead cell with exactly three live neighbors becomes a
+                    live cell (reproduction)
+                </li>
             </ul>
         </div>
-        <canvas id="gameCanvas"></canvas>
+        <canvas id="gameCanvas" width="666" height="666"></canvas>
         <div class="controls">
             <button id="startBtn">Start</button>
             <button id="stopBtn">Stop</button>
             <button id="clearBtn">Clear</button>
         </div>
-        <script src="script.js"></script>
     </body>
 </html>

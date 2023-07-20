@@ -13,8 +13,7 @@ body {
 
 canvas {
     border: 1px solid black;
-    width: 666px;
-    height: 666px;
+
 }
 
 .controls {
