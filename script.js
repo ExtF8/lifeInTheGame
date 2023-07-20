@@ -53,7 +53,7 @@ function drawGrid() {
 
     // grid lines
     ctx.strokeStyle = '#4e4c60';
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 0.5;
     // vertical
     for (let x = 0; x <= cols; x++) {
         ctx.beginPath();
