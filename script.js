@@ -2,7 +2,7 @@
 const canvas = document.getElementById('gameCanvas');
 canvas.addEventListener('click', handleCanvasClick);
 const ctx = canvas.getContext('2d');
-const cellSize = 6;
+const cellSize = 10;
 const rows = canvas.height / cellSize;
 const cols = canvas.width / cellSize;
 
