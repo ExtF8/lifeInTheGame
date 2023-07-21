@@ -38,9 +38,14 @@ document.getElementById('startBtn').addEventListener('click', () => {
     canvas.removeEventListener('click', handleCanvasClick);
 
     function animate() {
-        updateGame();
-        drawGrid();
-        animationId = requestAnimationFrame(animate);
+        setTimeout(() => {
+
+            updateGame();
+            drawGrid();
+            if (isAnimating) {
+                animationId = requestAnimationFrame(animate);
+            }
+        }, 100)
     }
     animate();
     console.log('start');
