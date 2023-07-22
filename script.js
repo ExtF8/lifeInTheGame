@@ -1,6 +1,7 @@
 // Get a reference to the canvas element and its drawing context
 const canvas = document.getElementById('gameCanvas');
 canvas.addEventListener('click', handleCanvasClick);
+canvas.addEventListener('touchstart', handleTouch, false);
 const ctx = canvas.getContext('2d');
 canvas.width = 800;
 canvas.height = 600;
@@ -16,7 +17,7 @@ function initializeGrid() {
 let grid = initializeGrid();
 drawGrid();
 
-// Add click event listener to the canvas
+// Add click event listener to the canvas/\web
 function handleCanvasClick(event) {
     const x = Math.floor(event.offsetX / cellSize);
     const y = Math.floor(event.offsetY / cellSize);
@@ -27,16 +28,41 @@ function handleCanvasClick(event) {
     }
 }
 
+// Add touch event listener to the canvas/\mobile
+function handleTouch(event) {
+    event.preventDefault();
+
+    // position
+    let rect = canvas.getBoundingClientRect();
+    let touch = event.touches[0];
+
+    // scale factor
+    let scaleX = canvas.width / canvas.clientWidth;
+    let scaleY = canvas.height / canvas.clientHeight;
+
+    // touch coordinates
+    let x = (touch.clientX - rect.left) * scaleX;
+    let y = (touch.clientY - rect.top) * scaleY;
+
+    // position to grid coordinates
+    let gridX = Math.floor(x / cellSize);
+    let gridY = Math.floor(y / cellSize);
+
+    // cell state
+    if (gridX >= 0 && gridX < cols && gridY >= 0 && gridY < rows) {
+        grid[gridY][gridX] = grid[gridY][gridX] ? 0 : 1;
+        drawGrid();
+    }
+}
+
 // Add event listeners to buttons
 let animationId;
 let isAnimating = false;
 
 document.getElementById('startBtn').addEventListener('click', () => {
     if (isAnimating) return;
-
     isAnimating = true;
     document.getElementById('startBtn').disabled = true;
-
     canvas.removeEventListener('click', handleCanvasClick);
 
     function animate() {
@@ -49,32 +75,22 @@ document.getElementById('startBtn').addEventListener('click', () => {
         }, 100);
     }
     animate();
-    console.log('start');
 });
 
 document.getElementById('stopBtn').addEventListener('click', () => {
     isAnimating = false;
-
     cancelAnimationFrame(animationId);
-
     canvas.addEventListener('click', handleCanvasClick);
-
     document.getElementById('startBtn').disabled = false;
-    console.log('end');
 });
 
 document.getElementById('clearBtn').addEventListener('click', () => {
     isAnimating = false;
-
     cancelAnimationFrame(animationId);
-
     canvas.addEventListener('click', handleCanvasClick);
-
     document.getElementById('startBtn').disabled = false;
-
     grid = initializeGrid();
     drawGrid();
-    console.log('clear');
 });
 
 // Drawing grid
