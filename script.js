@@ -2,6 +2,8 @@
 const canvas = document.getElementById('gameCanvas');
 canvas.addEventListener('click', handleCanvasClick);
 const ctx = canvas.getContext('2d');
+canvas.width = 800;
+canvas.height = 600;
 const cellSize = 10;
 const rows = canvas.height / cellSize;
 const cols = canvas.width / cellSize;
@@ -39,13 +41,12 @@ document.getElementById('startBtn').addEventListener('click', () => {
 
     function animate() {
         setTimeout(() => {
-
             updateGame();
             drawGrid();
             if (isAnimating) {
                 animationId = requestAnimationFrame(animate);
             }
-        }, 100)
+        }, 100);
     }
     animate();
     console.log('start');
