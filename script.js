@@ -76,7 +76,7 @@ function getTouchCoordinates(event) {
 
 // Start animation
 function startAnimation() {
-    if (isAnimating) return;
+    if (isAnimating || !hasAliveCells()) return;
     isAnimating = true;
     document.getElementById('startBtn').disabled = true;
     canvas.removeEventListener('click', handleCanvasClick);
@@ -108,6 +108,18 @@ function randomizeGrid() {
         }
     }
     drawGrid();
+}
+
+// Check if at least one cell is alive
+function hasAliveCells() {
+    for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+            if (grid[y][x] == 1) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 // Animation loop
