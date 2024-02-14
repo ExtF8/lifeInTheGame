@@ -26,6 +26,9 @@ let isAnimating = false;
 document.getElementById('startBtn').addEventListener('click', startAnimation);
 document.getElementById('stopBtn').addEventListener('click', stopAnimation);
 document.getElementById('clearBtn').addEventListener('click', clearGrid);
+document
+    .getElementById('randomizeBtn')
+    .addEventListener('click', randomizeGrid);
 
 // Initialize the grid with dead cells
 function initializeGrid() {
@@ -95,6 +98,18 @@ function clearGrid() {
     drawGrid();
 }
 
+// Randomize the grid with cells
+function randomizeGrid() {
+    if (isAnimating) return;
+    grid = new Array(rows).fill(null).map(() => new Array(cols).fill(0));
+    for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+            grid[y][x] = Math.random() > 0.5 ? 1 : 0;
+        }
+    }
+    drawGrid();
+}
+
 // Animation loop
 function animate() {
     updateGame();
@@ -106,7 +121,7 @@ function animate() {
 
 // Update game based on rules of the game
 function updateGame() {
-    const gridCopy = grid.map(row => [...row]);
+    const gridCopy = grid.map((row) => [...row]);
     for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
             const neighbors = countNeighbors(y, x);
@@ -141,7 +156,7 @@ function drawGrid() {
 
 // Draw a filled cell
 function drawCell(x, y) {
-    ctx.fillStyle = '#2c2c2c';
+    ctx.fillStyle = '#a6a6a6';
     ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
 }
 
