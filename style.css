@@ -34,8 +34,16 @@ h1 {
 }
 
 canvas {
-    border: 1px solid black;
+    border: 10px solid lightgrey;
     margin: 10px;
+}
+
+#gameCanvas {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 800px;
+    height: 800px;
+    background-color: whitesmoke;
 }
 
 @media (max-width: 768px) {
